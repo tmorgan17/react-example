@@ -3,4 +3,14 @@ services:
     - docker
 
 script:
-    - docker build -t react-app .
+    - docker build -t tmorgan17/react-example .
+    - docker images tmorgan17/react-example
+
+before_deploy:
+  - docker login -u tmorgan17 -p genetics17
+
+deploy:
+  provider: script
+  script: docker push tmorgan17/react-example
+  on:
+    branch: master
